@@ -1,0 +1,8 @@
+alarm_id,timestamp,turbine_id,alarm_code,description,severity,duration_min,status,vibration_mm_s,temperature_c,hydraulic_pressure_bar,estimated_power_kw
+ALM-1001,2026-10-20 06:15:00,WT-03,VIB-201,Drivetrain vibration above warning threshold,Critical,190,Active,11.4,79.0,165,1800
+ALM-1002,2026-10-20 11:45:00,WT-03,VIB-201,Drivetrain vibration above warning threshold,High,125,Active,10.8,77.0,168,2050
+ALM-1003,2026-10-21 04:20:00,WT-07,TMP-310,Gearbox oil temperature high,High,75,Acknowledged,4.2,94.0,170,2600
+ALM-1004,2026-10-21 08:10:00,WT-01,COM-101,Controller communication timeout,Medium,25,Resolved,3.1,68.0,171,3000
+ALM-1005,2026-10-22 02:30:00,WT-03,HYD-410,Hydraulic pressure outside operating band,High,95,Active,8.6,81.0,118,1600
+ALM-1006,2026-10-22 14:00:00,WT-05,TMP-310,Gearbox oil temperature high,Medium,42,Active,4.8,87.0,169,2450
+ALM-1007,2026-10-23 09:00:00,WT-07,COM-101,Controller communication timeout,Low,10,Resolved,3.3,70.0,171,2900

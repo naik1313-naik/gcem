@@ -1,0 +1,40 @@
+table,column,type,required,description,source_field,transform
+alarm_history,event_id,TEXT,Y,"Unique alarm event identifier",alarm_id,none
+alarm_history,turbine_id,TEXT,Y,"Turbine identifier (WT-XX)",turbine_id,uppercase
+alarm_history,turbine_site,TEXT,N,"Wind farm site name",turbines.site,join
+alarm_history,alarm_code,TEXT,Y,"Standardized alarm code",alarm_code,none
+alarm_history,alarm_description,TEXT,Y,"Human-readable description",description,none
+alarm_history,severity,TEXT,Y,"Critical/High/Medium/Low",severity,map_ordinal
+alarm_history,event_timestamp,TIMESTAMPTZ,Y,"Alarm trigger time (UTC)",timestamp,parse_utc
+alarm_history,duration_min,NUMERIC,Y,"Alarm duration in minutes",duration_min,float
+alarm_history,status,TEXT,Y,"Active/Acknowledged/Resolved",status,none
+alarm_history,vibration_mm_s,NUMERIC,N,"Vibration reading at alarm",vibration_mm_s,float_default_zero
+alarm_history,temperature_c,NUMERIC,N,"Temperature reading at alarm",temperature_c,float_default_zero
+alarm_history,hydraulic_pressure_bar,NUMERIC,N,"Hydraulic pressure at alarm",hydraulic_pressure_bar,float_default_170
+alarm_history,estimated_power_kw,NUMERIC,N,"Power output at alarm",estimated_power_kw,float_default_2500
+alarm_history,suggested_root_cause,TEXT,N,"Rule-based suggestion",suggested_root_cause,default_unknown
+alarm_history,source,TEXT,N,"Data source identifier",source,default_manual
+turbines,turbine_id,TEXT,Y,"Primary key (WT-XX)",id,none
+turbines,name,TEXT,Y,"Display name",name,none
+turbines,site,TEXT,N,"Wind farm site",site,none
+turbines,model,TEXT,N,"Turbine model",model,none
+turbines,capacity_kw,INTEGER,Y,"Rated capacity in kW",capacity_kw,int
+recurrence_features,recurrence_key,TEXT,Y,"turbine_id + '|' + alarm_code",computed,concat
+recurrence_features,total_occurrences,INTEGER,Y,"All-time occurrence count",computed,count
+recurrence_features,first_occurrence,TIMESTAMPTZ,Y,"Earliest event timestamp",computed,min
+recurrence_features,last_occurrence,TIMESTAMPTZ,Y,"Most recent event timestamp",computed,max
+recurrence_features,occurrences_24h,INTEGER,Y,"Occurrences in last 24 hours",computed,window_count
+recurrence_features,occurrences_7d,INTEGER,Y,"Occurrences in last 7 days",computed,window_count
+recurrence_features,occurrences_30d,INTEGER,Y,"Occurrences in last 30 days",computed,window_count
+recurrence_features,mean_interval_h,NUMERIC,N,"Mean inter-event interval (hours)",computed,mean_diff
+recurrence_features,median_interval_h,NUMERIC,N,"Median inter-event interval (hours)",computed,median_diff
+recurrence_features,max_interval_h,NUMERIC,N,"Max inter-event interval (hours)",computed,max_diff
+recurrence_features,burst_flag,BOOLEAN,Y,"True if >=3 events in 48h window",computed,burst_check
+sensor_catalog,sensor_id,TEXT,Y,"Unique sensor identifier",N/A,to_be_populated
+sensor_catalog,turbine_id,TEXT,Y,"Turbine this sensor belongs to",N/A,to_be_populated
+sensor_catalog,sensor_type,TEXT,Y,"vibration/temperature/pressure/power",N/A,to_be_populated
+sensor_catalog,location,TEXT,Y,"Physical location on turbine",N/A,to_be_populated
+sensor_catalog,unit,TEXT,Y,"Measurement unit",N/A,to_be_populated
+sensor_catalog,installation_date,DATE,N,"Sensor installation date",N/A,to_be_populated
+sensor_catalog,manufacturer,TEXT,N,"Sensor manufacturer",N/A,to_be_populated
+sensor_catalog,model,TEXT,N,"Sensor model number",N/A,to_be_populated

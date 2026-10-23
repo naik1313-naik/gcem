@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --color-navy-950: #071525;
+  --color-navy-900: #0b2035;
+  --color-navy-800: #0f2f4a;
+  --color-ink: #172033;
+  --color-mist: #f2f7fa;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0f766e;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-mist);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: #99f6e4;
+    color: #0f2f4a;
+  }
+}
+
+@layer components {
+  .surface {
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-[0_10px_30px_-18px_rgba(7,21,37,0.35)];
+  }
+  .field {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20;
+  }
+  .label {
+    @apply mb-1.5 block text-[0.7rem] font-bold uppercase tracking-wider text-slate-500;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50;
+  }
+  .table-wrap {
+    @apply overflow-x-auto rounded-xl border border-slate-200;
+  }
+  .data-table {
+    @apply w-full min-w-[720px] border-collapse text-left text-sm;
+  }
+  .data-table th {
+    @apply whitespace-nowrap border-b border-slate-200 bg-slate-50 px-4 py-3 text-[0.68rem] font-bold uppercase tracking-wider text-slate-500;
+  }
+  .data-table td {
+    @apply border-b border-slate-100 px-4 py-3 align-middle text-slate-700;
+  }
+  .data-table tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  .data-table tbody tr {
+    @apply transition hover:bg-teal-50/40;
+  }
+  .notice {
+    @apply rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900;
+  }
+}
+
+.hero-grid {
+  background-image:
+    radial-gradient(circle at 92% 10%, rgba(20, 184, 166, 0.24), transparent 34%),
+    linear-gradient(115deg, #0a2843 0%, #0b3d54 52%, #0c6470 100%);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #cbd5e1;
+}

@@ -1,0 +1,25 @@
+test_case,expected_behavior,example
+empty_file,Show friendly error; do not crash,empty file
+missing_required_column,Explain missing required columns; stop only dependent analysis,missing turbine_id/alarm_code
+all_rows_invalid,Report zero usable rows; skip inference and explain why,all required fields invalid
+missing_optional_sensor_location,Keep otherwise valid alarm; mark location unavailable,blank sensor_location
+invalid_timestamp,Quarantine from time-based analysis; retain other safe analysis,not-a-date
+non_numeric_sensor_reading,Skip sensor numeric analysis for row; retain alarm row if valid,sensor_value=not-a-number
+infinite_sensor_reading,Flag invalid numeric value; do not crash,sensor_value=inf
+extreme_outlier,Flag for review; do not auto-delete without a documented rule,sensor_value=1e12
+unknown_alarm_code,Retain but mark unmapped; no fabricated department,A999_UNKNOWN
+unknown_turbine_id,Flag unknown reference; handle according to schema,UNKNOWN_TURBINE_999
+duplicate_event_id,Flag possible duplicate; avoid double-counting only with defined rule,duplicate event_id
+duplicate_full_row,Flag exact duplicates and report count,identical rows
+invalid_severity,Normalize known variants or flag unknown values,URGENT-UNKNOWN
+unknown_department,Flag invalid label; exclude from supervised training labels,Dragon Team
+missing_department_label,Exclude from classifier training only; keep for other analysis,blank department label
+timezone_mixed,Normalize timestamps to UTC and document policy,timestamp with +05:30
+blank_whitespace,Treat whitespace-only strings as missing,spaces in description
+missing_optional_column,Run independent analyses; report unavailable modules,sensor_id column absent
+unreadable_file,Show parse error; do not crash,corrupt CSV/Excel
+model_artifact_missing,Skip ML inference with clear message; keep deterministic analytics,missing model file
+class_imbalance,Report class distribution and per-class metrics,rare department class
+time_series_gap,Report gaps if expected cadence is known; do not fabricate readings,missing time interval
+out_of_order_timestamps,Sort safely for trend analysis; preserve source row IDs,shuffled timestamps
+schema_variants,Offer manual column mapping,turbineId instead of turbine_id
